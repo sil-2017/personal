@@ -10,90 +10,53 @@
 
 __webpack_require__.r(__webpack_exports__);
 const data = () => {
-  let trigger = document.querySelectorAll('[data-json]'),
+  let personData = '{"about":["INFORMATION TECHNOLOGY European","INTERNSHIP 2021 Apr - CodeTime"],"portfolio": ["https://sil-2017.github.io/shop-site/","https://github.com/sil-2017/css.sass","https://sil-2017.github.io/Vue.js-VueX/","https://github.com/sil-2017/vue"],"contact":["khachatryansilvard2@gmail.com","https://www.linkedin.com/in/silvard-khachatryan-0a25871b5/","https://t.me/sil2017"]}';
+  let trigger = document.querySelectorAll('li[data-json]'),
       modal = document.querySelectorAll('[data-modal]'),
-      app = document.querySelector('.popup_content');
-  fetch("data.json").then(response => response.json()).then(json => {
-    let el = document.createElement("div");
-    setTimeout(function () {
-      trigger[0].addEventListener('click', e => {
-        e.preventDefault();
+      app = document.querySelector('.popup_content'),
+      person = JSON.parse(personData),
+      el = document.createElement("div");
+  [...trigger].forEach(function (item) {
+    item.addEventListener('click', e => {
+      e.preventDefault();
+
+      if (item.getAttribute('data-json') === 'about') {
+        el.innerHTML = `<div class="popup_info">
+              <div class="popupin">
+                <p>Education</p>
+                <p>${person.about[0]}</p>
+                <p>Interships</p>
+                <p>${person.about[1]}</p>
+              </div> </div>`;
+        app.appendChild(el);
+      } else if (item.getAttribute('data-json') === 'portfolio') {
         el.innerHTML = `<div class="popup_info">
                 <div class="popupin">
-                  <p>Education</p>
-                  <p>${json[0].name[0]}</p>
-                  <p>Interships</p>
-                  <p>${json[0].name[1]}</p>
-                </div> </div>`;
+                     <p><img class="ml" src="https://cdn.cdnlogo.com/logos/g/69/github-icon.svg"> Links in GitHub </p>
+                     <p>${person.portfolio[0]}</p>
+                     <p>${person.portfolio[1]}</p>
+                     <p>${person.portfolio[2]}</p>
+                     <p>${person.portfolio[3]}</p>
+                 </div>
+                 </div>`;
         app.appendChild(el);
-      });
-      trigger[1].addEventListener('click', e => {
-        e.preventDefault();
-        el.innerHTML = `<div class="popup_info">
-               <div class="popupin">
-                    <p><img class="ml" src="https://cdn.cdnlogo.com/logos/g/69/github-icon.svg"> Links in GitHub </p>
-                    <p>${json[1].name[0]}</p>
-                    <p>${json[1].name[1]}</p>
-                    <p>${json[1].name[2]}</p>
-                </div>
-                </div>`;
-        app.appendChild(el);
-      });
-      trigger[2].addEventListener('click', e => {
-        e.preventDefault();
-        el.innerHTML = `<div class="popup_info">
-                <div class="popupin">
-                    <p>Gmail</p>
-                    <p><img class="ml" src="https://cdn.cdnlogo.com/logos/g/68/gmail.svg"> ${json[2].name[0]}</p>
-                    <p>Linkedin </p>
-                    <p><img class="icns" src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/linkedin-512.png"><a href="${json[2].name[1]}" target="_blank">My Linkedin</a></p>
-                    <p>Telegram </p>
-                    <p><img class="icns" src="https://cdn.cdnlogo.com/logos/t/39/telegram.svg"><a href="${json[2].name[2]}" target="_blank">My Telegram</a></p>
-                </div>
-               </div>`;
-        app.appendChild(el);
-      });
-      trigger[3].addEventListener('click', e => {
-        e.preventDefault();
-        el.innerHTML = `<div class="popup_info">
-                <div class="popupin">
-                  <p>Education</p>
-                  <p>${json[0].name[0]}</p>
-                  <p>Interships</p>
-                  <p>${json[0].name[1]}</p>
-                </div> </div>`;
-        app.appendChild(el);
-      });
-      trigger[4].addEventListener('click', e => {
-        e.preventDefault();
-        el.innerHTML = `<div class="popup_info">
-                <div class="popupin">
-                    <p><img class="ml" src="https://cdn.cdnlogo.com/logos/g/69/github-icon.svg"> Links in GitHub</p>
-                    <p>${json[1].name[0]}</p>
-                    <p>${json[1].name[1]}</p>
-                    <p>${json[1].name[2]}</p>
-                </div>
-                </div>`;
-        app.appendChild(el);
-      });
-      trigger[5].addEventListener('click', e => {
-        e.preventDefault();
+      } else if (item.getAttribute('data-json') === 'contact') {
+        person.contact.forEach(item => {
+          console.log(item);
+        });
         el.innerHTML = `<div class="popup_info">
                 <div class="popupin">
                     <p>Gmail</p>
-                    <p><img class="ml" src="https://cdn.cdnlogo.com/logos/g/68/gmail.svg"> ${json[2].name[0]}</p>
+                    <p><img class="ml" src="https://cdn.cdnlogo.com/logos/g/68/gmail.svg"> ${person.contact[0]}</p>
                     <p>Linkedin </p>
-                    <p><img class="icns" src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/linkedin-512.png"><a href="${json[2].name[1]}" target="_blank">My Linkedin</a></p>
+                    <p><img class="icns" src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/linkedin-512.png"><a href="${person.contact[1]}" target="_blank">My Linkedin</a></p>
                     <p>Telegram </p>
-                    <p><img class="icns" src="https://cdn.cdnlogo.com/logos/t/39/telegram.svg"><a href="${json[2].name[2]}" target="_blank">My Telegram</a></p>
-         
+                    <p><img class="icns" src="https://cdn.cdnlogo.com/logos/t/39/telegram.svg"><a href="${person.contact[2]}" target="_blank">My Telegram</a></p>
                 </div>
                </div>`;
         app.appendChild(el);
-      });
+      }
     });
-  }).catch(function (err) {
-    console.log(err);
   });
 };
 
